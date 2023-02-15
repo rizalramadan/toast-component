@@ -1,32 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import { ToastContext } from '../ToastProvider';
-import Button from '../Button';
-import ToastShelf from '../ToastShelf';
+import { ToastContext } from "../ToastProvider";
+import Button from "../Button";
+import ToastShelf from "../ToastShelf";
 
-import styles from './ToastPlayground.module.css';
+import styles from "./ToastPlayground.module.css";
 
-const VARIANT_OPTIONS = [
-  'notice',
-  'warning',
-  'success',
-  'error',
-];
+const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const { createToast } = React.useContext(ToastContext);
 
-  const [message, setMessage] = React.useState('');
-  const [variant, setVariant] = React.useState(
-    VARIANT_OPTIONS[0]
-  );
+  const [message, setMessage] = React.useState("");
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
 
   function handleCreateToast(event) {
     event.preventDefault();
 
     createToast(message, variant);
 
-    setMessage('');
+    setMessage("");
     setVariant(VARIANT_OPTIONS[0]);
   }
 
@@ -39,21 +32,19 @@ function ToastPlayground() {
 
       <ToastShelf />
 
-      <form
-        className={styles.controlsWrapper}
-        onSubmit={handleCreateToast}
-      >
+      <form className={styles.controlsWrapper} onSubmit={handleCreateToast}>
         <div className={styles.row}>
           <label
             htmlFor="message"
             className={styles.label}
-            style={{ alignSelf: 'baseline' }}
+            style={{ alignSelf: "baseline" }}
           >
             Message
           </label>
           <div className={styles.inputWrapper}>
             <textarea
               id="message"
+              required={true}
               className={styles.messageInput}
               value={message}
               onChange={(event) => {
@@ -65,9 +56,7 @@ function ToastPlayground() {
 
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
-          <div
-            className={`${styles.inputWrapper} ${styles.radioWrapper}`}
-          >
+          <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             {VARIANT_OPTIONS.map((option) => {
               const id = `variant-${option}`;
 
@@ -92,9 +81,7 @@ function ToastPlayground() {
 
         <div className={styles.row}>
           <div className={styles.label} />
-          <div
-            className={`${styles.inputWrapper} ${styles.radioWrapper}`}
-          >
+          <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             <Button>Pop Toast!</Button>
           </div>
         </div>
